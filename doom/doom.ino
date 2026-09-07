@@ -11,6 +11,10 @@
 #include "Player.h"
 #include "Enemies.h"
 
+#include "data/E1-HANGAR.h"
+#include "data/E2-DEIMOS.h"
+#include "data/E3-INFERNO.h"
+
 // ════════════════════════════════════════════════════════════
 //  GLOBAL NESNE TANIMLARI
 // ════════════════════════════════════════════════════════════
@@ -194,97 +198,13 @@ void loadLevel(int level) {
     exitPressed = false;    // çıkış switch'i normal haline döner
     elevatorPending = false;
     for (int i = 0; i < NUM_SPRITES; i++) initSprite(i, 0, 0, 0, 0);
-    for (int y = 0; y < MH; y++) for (int x = 0; x < MW; x++) {
-        if (level == 1)      MAP[y][x] = LEVEL1[y][x];
-        else if (level == 2) MAP[y][x] = LEVEL2[y][x];
-        else if (level == 3) MAP[y][x] = LEVEL3[y][x];
-    }
-
+    
     if (level == 1) {
-        px = 4.5; py = 28.5; dirX = 0; dirY = -1; planeX = 0.66; planeY = 0;
-        // E1 HANGAR: baslangic -> zigzag depo (ANAHTAR) -> ana salon -> kuzey
-        // kanat -> kilitli cikis. Ambar ile dongu; T(25,20) gizli odayi acar (pusu).
-        initSprite(0, 6.5, 25.5, 5, 1); initSprite(1, 3.5, 29.5, 5, 1); initSprite(2, 8.5, 29.5, 15, 1);
-        initSprite(3, 2.5, 24.5, ST_LAMP, 1); initSprite(4, 7.5, 27.5, ST_CORPSE, 1); initSprite(5, 2.5, 30.5, 9, 1);
-        initSprite(6, 9.5, 30.5, 10, 1); initSprite(7, 7.5, 13.5, 17, 1); initSprite(8, 11.5, 16.5, 17, 1);
-        initSprite(9, 3.5, 14.5, 17, 1); initSprite(10, 10.5, 12.5, 5, 1); initSprite(11, 6.5, 16.5, 5, 1);
-        initSprite(12, 2.5, 16.5, 11, 1); initSprite(13, 2.5, 13.5, 10, 1); initSprite(14, 12.5, 17.5, 9, 1);
-        initSprite(15, 4.5, 17.5, 15, 1); initSprite(16, 8.5, 14.5, ST_CORPSE, 1); initSprite(17, 12.5, 12.5, ST_LAMP, 1);
-        initSprite(18, 17.5, 13.5, ST_PILLAR, 1); initSprite(19, 24.5, 13.5, ST_PILLAR, 1); initSprite(20, 17.5, 17.5, ST_PILLAR, 1);
-        initSprite(21, 24.5, 17.5, ST_PILLAR, 1); initSprite(22, 16.5, 12.5, 5, 1); initSprite(23, 22.5, 16.5, 5, 1);
-        initSprite(24, 26.5, 12.5, 5, 1); initSprite(25, 19.5, 18.5, 5, 1); initSprite(26, 21.5, 13.5, 17, 1);
-        initSprite(27, 15.5, 18.5, 17, 1); initSprite(28, 21.5, 15.5, 14, 1); initSprite(29, 14.5, 11.5, 15, 1);
-        initSprite(30, 27.5, 11.5, 15, 1); initSprite(31, 14.5, 19.5, 15, 1); initSprite(32, 27.5, 19.5, 15, 1);
-        initSprite(33, 16.5, 19.5, 9, 1); initSprite(34, 26.5, 18.5, 9, 1); initSprite(35, 20.5, 11.5, 9, 1);
-        initSprite(36, 22.5, 11.5, 10, 1); initSprite(37, 18.5, 15.5, ST_CORPSE, 1); initSprite(38, 23.5, 18.5, ST_CORPSE, 1);
-        initSprite(39, 27.5, 12.5, ST_SKULLS, 1); initSprite(40, 14.5, 15.5, ST_LAMP, 1); initSprite(41, 27.5, 15.5, ST_LAMP, 1);
-        initSprite(42, 21.5, 9.5, ST_LAMP, 1); initSprite(43, 15.5, 4.5, 5, 1); initSprite(44, 20.5, 6.5, 5, 1);
-        initSprite(45, 25.5, 4.5, 5, 1); initSprite(46, 23.5, 5.5, 14, 1); initSprite(47, 14.5, 7.5, 15, 1);
-        initSprite(48, 26.5, 3.5, 15, 1); initSprite(49, 14.5, 3.5, 9, 1); initSprite(50, 20.5, 3.5, 10, 1);
-        initSprite(51, 26.5, 4.5, ST_CBRA, 1); initSprite(52, 26.5, 6.5, ST_CBRA, 1); initSprite(53, 17.5, 6.5, ST_CORPSE, 1);
-        initSprite(54, 15.5, 7.5, ST_SKULLS, 1); initSprite(55, 28.5, 6.5, 10, 1); initSprite(56, 30.5, 6.5, 9, 1);
-        initSprite(57, 28.5, 3.5, ST_CBRA, 1); initSprite(58, 14.5, 24.5, 5, 1); initSprite(59, 21.5, 27.5, 5, 1);
-        initSprite(60, 23.5, 23.5, 5, 1); initSprite(61, 17.5, 26.5, 17, 1); initSprite(62, 13.5, 28.5, 15, 1);
-        initSprite(63, 15.5, 28.5, 15, 1); initSprite(64, 22.5, 28.5, 15, 1); initSprite(65, 24.5, 26.5, 15, 1);
-        initSprite(66, 13.5, 23.5, 15, 1); initSprite(67, 24.5, 29.5, 9, 1); initSprite(68, 13.5, 29.5, 9, 1);
-        initSprite(69, 18.5, 29.5, 10, 1); initSprite(70, 19.5, 24.5, ST_CORPSE, 1); initSprite(71, 16.5, 23.5, ST_LAMP, 1);
-        initSprite(72, 29.5, 14.5, 43, 1); initSprite(73, 30.5, 13.5, 9, 1); initSprite(74, 29.5, 13.5, ST_SKULLS, 1);
-        initSprite(75, 29.5, 15.5, 5, -1); initSprite(76, 30.5, 15.5, 5, -1);
+        loadLevel_E1();
     } else if (level == 2) {
-        px = 15.5; py = 27.5; dirX = 0; dirY = -1; planeX = 0.66; planeY = 0;
-        // E2 DEIMOS: merkez hub + 4 kanat. Anahtar bati kislada, kilit kuzeyde.
-        // Yemekhane dongusu; T(30,16) dogu ambarindaki gizli odayi acar (pusu).
-        initSprite(0, 13.5, 28.5, ST_CORPSE, 1); initSprite(1, 12.5, 25.5, ST_LAMP, 1); initSprite(2, 19.5, 25.5, ST_LAMP, 1);
-        initSprite(3, 18.5, 26.5, 5, 1); initSprite(4, 12.5, 29.5, 9, 1); initSprite(5, 3.5, 24.5, 5, 1);
-        initSprite(6, 8.5, 27.5, 5, 1); initSprite(7, 5.5, 29.5, 5, 1); initSprite(8, 9.5, 24.5, 17, 1);
-        initSprite(9, 2.5, 23.5, 15, 1); initSprite(10, 10.5, 29.5, 15, 1); initSprite(11, 2.5, 29.5, 10, 1);
-        initSprite(12, 6.5, 23.5, 9, 1); initSprite(13, 6.5, 26.5, ST_CORPSE, 1); initSprite(14, 2.5, 26.5, ST_CBRA, 1);
-        initSprite(15, 3.5, 12.5, 17, 1); initSprite(16, 6.5, 18.5, 17, 1); initSprite(17, 6.5, 12.5, 5, 1);
-        initSprite(18, 2.5, 18.5, 5, 1); initSprite(19, 3.5, 15.5, 14, 1); initSprite(20, 2.5, 15.5, 11, 1);
-        initSprite(21, 7.5, 11.5, 10, 1); initSprite(22, 2.5, 11.5, 9, 1); initSprite(23, 5.5, 15.5, ST_CORPSE, 1);
-        initSprite(24, 2.5, 19.5, ST_SKULLS, 1); initSprite(25, 13.5, 13.5, 5, 1); initSprite(26, 18.5, 18.5, 5, 1);
-        initSprite(27, 18.5, 13.5, 17, 1); initSprite(28, 12.5, 19.5, 15, 1); initSprite(29, 19.5, 12.5, 15, 1);
-        initSprite(30, 14.5, 17.5, ST_PILLAR, 1); initSprite(31, 17.5, 14.5, ST_PILLAR, 1); initSprite(32, 14.5, 14.5, ST_LAMP, 1);
-        initSprite(33, 17.5, 17.5, ST_LAMP, 1); initSprite(34, 12.5, 12.5, 10, 1); initSprite(35, 16.5, 22.5, ST_LAMP, 1);
-        initSprite(36, 24.5, 13.5, 15, 1); initSprite(37, 25.5, 13.5, 15, 1); initSprite(38, 24.5, 14.5, 15, 1);
-        initSprite(39, 28.5, 17.5, 15, 1); initSprite(40, 29.5, 18.5, 15, 1); initSprite(41, 26.5, 18.5, 15, 1);
-        initSprite(42, 27.5, 12.5, 5, 1); initSprite(43, 23.5, 17.5, 5, 1); initSprite(44, 28.5, 14.5, 5, 1);
-        initSprite(45, 25.5, 16.5, 17, 1); initSprite(46, 23.5, 12.5, 9, 1); initSprite(47, 29.5, 13.5, 9, 1);
-        initSprite(48, 23.5, 19.5, 9, 1); initSprite(49, 29.5, 19.5, 43, 1); initSprite(50, 26.5, 12.5, ST_CORPSE, 1);
-        initSprite(51, 24.5, 19.5, ST_SKULLS, 1); initSprite(52, 23.5, 16.5, ST_LAMP, 1); initSprite(53, 13.5, 5.5, 14, 1);
-        initSprite(54, 18.5, 5.5, 14, 1); initSprite(55, 12.5, 6.5, 5, 1); initSprite(56, 19.5, 6.5, 5, 1);
-        initSprite(57, 12.5, 7.5, 10, 1); initSprite(58, 19.5, 7.5, 9, 1); initSprite(59, 12.5, 3.5, ST_CBRA, 1);
-        initSprite(60, 19.5, 3.5, ST_CBRA, 1); initSprite(61, 15.5, 6.5, ST_CORPSE, 1); initSprite(62, 16.5, 6.5, ST_SKULLS, 1);
-        initSprite(63, 15.5, 9.5, ST_LAMP, 1); initSprite(64, 25.5, 9.5, 43, 1); initSprite(65, 26.5, 9.5, 10, 1);
-        initSprite(66, 24.5, 9.5, 9, 1); initSprite(67, 24.5, 10.5, 5, -1); initSprite(68, 27.5, 10.5, 5, -1);
+        loadLevel_E2();
     } else if (level == 3) {
-        px = 15.5; py = 28.5; dirX = 0; dirY = -1; planeX = 0.66; planeY = 0;
-        // E3 INFERNO: narteks -> koridor -> tapinak halkasi + ic mabet. Anahtar
-        // bati sapelinde, final apsiste. T(23,7) gizli hucreyi acar (PUSU BARONU).
-        initSprite(0, 13.5, 28.5, ST_CORPSE, 1); initSprite(1, 12.5, 26.5, ST_LAMP, 1); initSprite(2, 19.5, 26.5, ST_LAMP, 1);
-        initSprite(3, 12.5, 29.5, 9, 1); initSprite(4, 19.5, 29.5, 10, 1); initSprite(5, 17.5, 26.5, 5, 1);
-        initSprite(6, 15.5, 23.5, ST_CBRA, 1); initSprite(7, 16.5, 21.5, ST_CBRA, 1); initSprite(8, 7.5, 9.5, 5, 1);
-        initSprite(9, 24.5, 9.5, 5, 1); initSprite(10, 7.5, 18.5, 5, 1); initSprite(11, 24.5, 18.5, 5, 1);
-        initSprite(12, 15.5, 9.5, 5, 1); initSprite(13, 9.5, 14.5, 17, 1); initSprite(14, 22.5, 12.5, 17, 1);
-        initSprite(15, 15.5, 18.5, 17, 1); initSprite(16, 21.5, 9.5, 14, 1); initSprite(17, 6.5, 8.5, 15, 1);
-        initSprite(18, 25.5, 8.5, 15, 1); initSprite(19, 6.5, 19.5, 15, 1); initSprite(20, 25.5, 19.5, 15, 1);
-        initSprite(21, 10.5, 10.5, ST_LAMP, 1); initSprite(22, 21.5, 10.5, ST_LAMP, 1); initSprite(23, 10.5, 17.5, ST_LAMP, 1);
-        initSprite(24, 21.5, 17.5, ST_LAMP, 1); initSprite(25, 6.5, 13.5, 9, 1); initSprite(26, 25.5, 13.5, 9, 1);
-        initSprite(27, 8.5, 11.5, ST_CORPSE, 1); initSprite(28, 23.5, 16.5, ST_CORPSE, 1); initSprite(29, 12.5, 18.5, ST_CORPSE, 1);
-        initSprite(30, 6.5, 9.5, ST_SKULLS, 1); initSprite(31, 25.5, 18.5, ST_SKULLS, 1); initSprite(32, 14.5, 13.5, 14, 1);
-        initSprite(33, 17.5, 13.5, 14, 1); initSprite(34, 15.5, 14.5, 43, 1); initSprite(35, 12.5, 12.5, ST_CBRA, 1);
-        initSprite(36, 19.5, 12.5, ST_CBRA, 1); initSprite(37, 16.5, 14.5, ST_SKULLS, 1); initSprite(38, 12.5, 15.5, 10, 1);
-        initSprite(39, 19.5, 15.5, 9, 1); initSprite(40, 2.5, 13.5, 11, 1); initSprite(41, 3.5, 11.5, 17, 1);
-        initSprite(42, 3.5, 15.5, 17, 1); initSprite(43, 2.5, 10.5, ST_CBRA, 1); initSprite(44, 2.5, 16.5, 10, 1);
-        initSprite(45, 3.5, 13.5, ST_CORPSE, 1); initSprite(46, 28.5, 11.5, 5, 1); initSprite(47, 28.5, 16.5, 5, 1);
-        initSprite(48, 29.5, 14.5, 17, 1); initSprite(49, 27.5, 10.5, 9, 1); initSprite(50, 30.5, 17.5, 10, 1);
-        initSprite(51, 27.5, 17.5, 15, 1); initSprite(52, 30.5, 10.5, ST_LAMP, 1); initSprite(53, 29.5, 10.5, ST_SKULLS, 1);
-        initSprite(54, 29.5, 7.5, 43, 1); initSprite(55, 28.5, 7.5, 9, 1); initSprite(56, 30.5, 7.5, 10, 1);
-        initSprite(57, 29.5, 6.5, 14, -1); initSprite(58, 28.5, 6.5, ST_SKULLS, 1); initSprite(59, 12.5, 4.5, 14, 1);
-        initSprite(60, 19.5, 4.5, 14, 1); initSprite(61, 11.5, 5.5, 5, 1); initSprite(62, 20.5, 5.5, 5, 1);
-        initSprite(63, 15.5, 5.5, 5, 1); initSprite(64, 16.5, 3.5, 5, 1); initSprite(65, 10.5, 3.5, 15, 1);
-        initSprite(66, 21.5, 3.5, 15, 1); initSprite(67, 10.5, 6.5, 10, 1); initSprite(68, 21.5, 6.5, 9, 1);
-        initSprite(69, 13.5, 3.5, ST_CBRA, 1); initSprite(70, 18.5, 3.5, ST_CBRA, 1);
+        loadLevel_E3();
     }
 
     levelItemTotal = countLevelItemsLeft();   // intermission ITEMS x/y payı

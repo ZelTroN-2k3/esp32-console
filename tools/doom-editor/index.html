@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-OS DOOM Level Editor</title>
+    <link rel="stylesheet" href="style.css?v=5">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div style="display: flex; align-items: baseline; gap: 1rem;">
+                <h1><span class="highlight">DOOM</span> LEVEL EDITOR</h1>
+                <span id="current-filename" style="color: var(--text-muted); font-family: monospace; font-size: 0.9rem;">NEW-LEVEL.h</span>
+            </div>
+            <div class="actions" style="display: flex; align-items: center; gap: 1rem;">
+                <button id="btn-new" class="btn btn-secondary">New Level</button>
+                <button id="btn-load" class="btn btn-secondary">Load Level</button>
+                <button id="btn-check-map" class="btn btn-secondary" style="background-color: transparent; color: var(--accent-blue); border: 2px solid var(--accent-blue); font-weight: bold;">Check Map</button>
+                <div style="width: 1px; height: 24px; background-color: var(--border-color); margin: 0 0.5rem;"></div>
+                <button id="btn-save" class="btn btn-primary" disabled>Save</button>
+                <button id="btn-save-as" class="btn btn-primary">Save As...</button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content" style="position: relative;">
+            <!-- Left Sidebar: Tools & Palette -->
+            <aside class="sidebar">
+                <div class="panel">
+                    <h2>Tiles (Map)</h2>
+                    <div class="palette-grid" id="tile-palette">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <h2>Sprites (Entities)</h2>
+                    <div class="palette-grid" id="sprite-palette">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <h2>Player / Erase</h2>
+                    <div class="palette-grid" id="action-palette">
+                        <div class="palette-item" data-action="player">
+                            <div class="preview player"></div>
+                            <span class="label">Player Start</span>
+                        </div>
+                        <div class="palette-item" data-action="erase">
+                            <div class="preview erase"></div>
+                            <span class="label">Eraser</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <h2>Image Preview</h2>
+                    <div id="image-preview-box" style="width: 100%; height: 64px; background-color: var(--bg-main); border: 1px solid var(--border-color); background-size: contain; background-repeat: no-repeat; background-position: center; border-radius: 4px; image-rendering: pixelated;">
+                    </div>
+                    <div id="image-preview-name" style="text-align: center; margin-top: 0.5rem; font-size: 0.8rem; color: var(--text-muted); min-height: 1rem;">No selection</div>
+                </div>
+
+            </aside>
+
+            <!-- Center: Editor Grid -->
+            <section class="editor-area">
+                <div class="canvas-wrapper">
+                    <div id="grid-container" class="grid-container" style="position: relative;">
+                        <!-- 32x32 cells injected by JS -->
+                        <!-- SVG Overlay for drawing lines -->
+                        <svg id="link-svg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 50;"></svg>
+                    </div>
+                </div>
+            </section>
+            
+            <div id="minimap-container" style="position: absolute; top: 1rem; right: 1rem; opacity: 0.8; display: none; z-index: 100; transition: opacity 0.2s;">
+                <canvas id="minimap" width="256" height="256" style="width: 256px; height: 256px; border: 2px solid var(--border-color); background-color: rgba(0,0,0,0.8); cursor: crosshair; border-radius: 8px; box-shadow: 0 8px 16px rgba(0,0,0,0.8);"></canvas>
+            </div>
+        </main>
+        
+        <!-- Footer Status Bar -->
+        <footer class="footer" style="display: flex; justify-content: space-between; align-items: center; padding: 0.25rem 1rem; background-color: var(--bg-panel); border-top: 1px solid var(--border-color); font-size: 0.8rem; color: var(--text-muted);">
+            <div id="footer-coords">X: -- : Y: --</div>
+            <div id="footer-zoom">ZOOM: x2</div>
+        </footer>
+    </div>
+
+    <!-- Modals Removed -->
+    <script src="main.js?v=23"></script>
+</body>
+</html>

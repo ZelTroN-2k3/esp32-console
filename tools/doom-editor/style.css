@@ -1,0 +1,282 @@
+:root {
+    --bg-main: #0a0a0a;
+    --bg-panel: #16161a;
+    --bg-panel-hover: #1f1f24;
+    --text-main: #e0e0e0;
+    --text-muted: #888888;
+    --accent-red: #ff3333;
+    --accent-red-hover: #ff5555;
+    --accent-blue: #00aaff;
+    --accent-blue-hover: #33bbff;
+    --border-color: #333333;
+    
+    /* Tile Colors */
+    --c-empty: #0a0a0a;
+    --c-wall1: #555555;
+    --c-wall2: #666666;
+    --c-wall3: #777777;
+    --c-wall4: #888888;
+    --c-wall5: #999999;
+    --c-door:  #8b4513;
+    --c-lock:  #ffd700;
+    --c-exit:  #00ff00;
+    --c-elev:  #4682b4;
+    --c-secr:  #333333;
+
+    /* Grid layout constants */
+    --grid-size: 32;
+    --cell-size: 20px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.app-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: var(--bg-panel);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.header h1 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.header .highlight {
+    color: var(--accent-red);
+}
+
+.btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-primary {
+    background-color: var(--accent-red);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: var(--accent-red-hover);
+    transform: translateY(-1px);
+}
+
+.btn-secondary {
+    background-color: var(--border-color);
+    color: var(--text-main);
+    margin-right: 0.5rem;
+}
+
+.btn-secondary:hover {
+    background-color: #444;
+}
+
+.main-content {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+.sidebar {
+    width: 300px;
+    background-color: var(--bg-panel);
+    border-right: 1px solid var(--border-color);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1.5rem;
+    
+    /* Hide scrollbar */
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.sidebar::-webkit-scrollbar {
+    display: none;
+}
+
+.panel h2 {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 0.8rem;
+    letter-spacing: 1px;
+}
+
+.palette-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+}
+
+.palette-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    background-color: var(--bg-main);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.palette-item:hover {
+    background-color: var(--bg-panel-hover);
+}
+
+.palette-item.active {
+    border-color: var(--accent-red);
+    background-color: rgba(255, 51, 51, 0.1);
+}
+
+.palette-item .preview {
+    width: 20px;
+    height: 20px;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 2px;
+}
+
+.palette-item .label {
+    font-size: 0.8rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Custom Preview Colors for Sprites */
+.sprite-preview {
+    border-radius: 50% !important; /* Sprites are circles */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: bold;
+    color: #000;
+}
+.player { background-color: #00ffff; border-radius: 50% !important; }
+.erase { background-color: transparent; border: 1px dashed var(--accent-red) !important; }
+
+/* Player Direction Indicator */
+.player-start::after {
+    content: '';
+    position: absolute;
+    width: 0; height: 0;
+    border-left: 3px solid transparent;
+    border-right: 3px solid transparent;
+    border-bottom: 5px solid #000;
+}
+.player-start[data-dir="N"]::after { top: 2px; }
+.player-start[data-dir="S"]::after { bottom: 2px; transform: rotate(180deg); }
+.player-start[data-dir="E"]::after { right: 2px; transform: rotate(90deg); }
+.player-start[data-dir="W"]::after { left: 2px; transform: rotate(270deg); }
+
+.leak-warning {
+    background-color: var(--accent-red) !important;
+    animation: blink 1s infinite;
+}
+@keyframes blink {
+    50% { opacity: 0.5; }
+}
+
+
+.editor-area {
+    flex: 1;
+    display: flex; /* Use flex but don't center here, let margin:auto do it safely */
+    background-color: var(--bg-main);
+    overflow: hidden; /* Hide scrollbars, panning will be done via right-click */
+    position: relative;
+}
+
+.canvas-wrapper {
+    margin: auto; /* Safe centering, won't cut off top/left when overflowing */
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(var(--grid-size), var(--cell-size));
+    grid-template-rows: repeat(var(--grid-size), var(--cell-size));
+    gap: 1px;
+    background-color: #222; /* grid line color */
+    border: 2px solid #444;
+}
+
+.cell {
+    width: var(--cell-size);
+    height: var(--cell-size);
+    background-color: var(--c-empty);
+    position: relative;
+    user-select: none;
+    cursor: crosshair;
+}
+
+.cell:hover::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: transparent;
+    border: 2px solid #00ff00;
+    box-sizing: border-box;
+    pointer-events: none;
+    z-index: 20;
+}
+
+.grid-container.erase-mode .cell:hover::after {
+    border-color: var(--accent-red);
+}
+
+.cell .sprite {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    right: 2px;
+    bottom: 2px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: bold;
+    color: #000;
+}
+
+.cell .sprite.player-start {
+    background-color: #00ffff !important;
+    border: 1px solid #00aaaa;
+}
+

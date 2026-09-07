@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-OS Platformer — Map Editor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Outfit:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <div class="header-inner" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+        <div style="display: flex; align-items: baseline; gap: 1rem;">
+            <h1><span>E-OS</span> PLATFORMER — MAP EDITOR</h1>
+            <span id="current-filename" style="color: var(--text); font-family: monospace; font-size: 0.9rem;">Level-X.h</span>
+        </div>
+        <div class="actions" style="display: flex; align-items: center; gap: 1rem;">
+            <button id="btn-new" class="action-btn btn-secondary">New</button>
+            <button id="btn-load" class="action-btn btn-secondary">Load</button>
+            <div style="width: 1px; height: 24px; background-color: var(--border); margin: 0 0.5rem;"></div>
+            <button id="btn-save" class="action-btn btn-primary" disabled>Save</button>
+            <button id="btn-save-as" class="action-btn btn-primary">Save As...</button>
+        </div>
+    </div>
+</header>
+
+<div class="container">
+    <!-- TOOLBAR -->
+    <div class="panel toolbar">
+
+        <div class="tool-group">
+            <h3>🏗️ Building Blocks</h3>
+            <button class="brush-btn" data-val="0"><div class="color-dot" style="background:#0d1020;"></div> Air (Eraser)</button>
+            <button class="brush-btn active" data-val="1"><div class="color-dot" style="background:#2d8c37;border-top:2px solid #5dda6a;"></div> Grass Ground</button>
+            <button class="brush-btn" data-val="2"><div class="color-dot" style="background:#b84332;"></div> Brick</button>
+            <button class="brush-btn" data-val="3"><div class="color-dot" style="background:#c0c0d0;"></div> Spikes ⚠️</button>
+        </div>
+
+        <div class="tool-group">
+            <h3>✨ Objects</h3>
+            <button class="brush-btn" data-val="4"><div class="color-dot" style="background:#ffd700; border-radius:50%;"></div> Gold Coin</button>
+            <button class="brush-btn" data-val="5"><div class="color-dot" style="background:#ff3333;"></div> 🚩 Flag (Finish)</button>
+            <button class="brush-btn" data-val="6"><div class="color-dot" style="background:#dd4444;"></div> 👾 Enemy</button>
+        </div>
+
+        <div class="jump-helper">
+            <strong>Jump Physics:</strong><br>
+            ↕ Height: <strong>3.5 tiles</strong><br>
+            ↔ Range: <strong>4.5 tiles</strong><br>
+            ⚡ 2 tiles high ↔ <strong>~3 tiles horizontal</strong><br>
+            <br>
+            <strong>Rule:</strong> Max <strong>2 tiles gap</strong> + 2 tiles up between platforms
+        </div>
+
+        <button class="action-btn btn-danger" id="clearBtn">🗑️ Clear Level</button>
+        <button class="action-btn btn-secondary" id="fillGroundBtn">🌍 Fill Bottom Row</button>
+    </div>
+
+    <!-- EDITOR GRID -->
+    <div class="panel editor-panel">
+        <div class="editor-header">
+            <span>40×16 Tile Grid (8px per tile)</span>
+            <span class="coords" id="coordDisplay">R:- C:-</span>
+        </div>
+        <div class="grid-scroll">
+            <div class="grid-wrapper">
+                <div id="grid" class="grid"></div>
+            </div>
+        </div>
+        <div style="margin-top:8px;">
+            <canvas id="previewCanvas" width="320" height="128"></canvas>
+            <div class="preview-legend">
+                <span><div class="legend-dot" style="background:#2d8c37;"></div> Grass</span>
+                <span><div class="legend-dot" style="background:#b84332;"></div> Brick</span>
+                <span><div class="legend-dot" style="background:#c0c0d0;"></div> Spike</span>
+                <span><div class="legend-dot" style="background:#ffd700;border-radius:50%;"></div> Coin</span>
+                <span><div class="legend-dot" style="background:#ff3333;"></div> Flag</span>
+                <span><div class="legend-dot" style="background:#50c8ff;"></div> Player</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- STATS -->
+    <div class="panel output-panel" style="flex: 0.3;">
+        <h2>📊 Statistics</h2>
+        <div class="stats-bar" id="statsBar" style="flex-direction: column;">
+            <span>Coins: <span class="stat" id="statCoins">0</span></span>
+            <span>Enemies: <span class="stat" id="statEnemies">0</span></span>
+            <span>Flags: <span class="stat" id="statFlags">0</span></span>
+            <span>Ground: <span class="stat" id="statGround">0</span></span>
+        </div>
+    </div>
+</div>
+
+<script src="main.js"></script>
+</body>
+</html>
+

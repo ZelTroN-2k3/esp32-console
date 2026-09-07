@@ -27,10 +27,14 @@ int dotsLeft = 0;
 int level = 1;
 int joyCenterX = ADC_CENTER;
 int joyCenterY = ADC_CENTER;
-uint32_t stateTimer = 0;
 uint32_t soundEndTime = 0;
-int prevBtnA = HIGH;
+uint32_t stateTimer = 0;
 GameState state = TITLE;
+// Dynamic spawns with default fallback values
+int pacSpawnC = 9;
+int pacSpawnR = 11;
+int ghostSpawnC[NUM_GHOSTS] = {8, 9, 10};
+int ghostSpawnR[NUM_GHOSTS] = {7, 7, 7};
 
 // ============================================================
 //  OS Wrapper fonksiyonlari
@@ -47,16 +51,16 @@ void returnToOS() {
 //  resetActors — Pacman ve hayaletleri baslangica koy
 // ============================================================
 void resetActors() {
-    pac.x = 9 * TILE + HALF_TILE;
-    pac.y = 11 * TILE + HALF_TILE;
+    pac.x = pacSpawnC * TILE + HALF_TILE;
+    pac.y = pacSpawnR * TILE + HALF_TILE;
     pac.dx = -1; pac.dy = 0;
     pac.ndx = -1; pac.ndy = 0;
     pac.speed = PAC_BASE_SPEED + (level * PAC_SPEED_PER_LV);
 
     uint16_t ghostColors[] = {COL_GHOST_RED, COL_GHOST_PINK, COL_GHOST_CYAN};
     for (int i = 0; i < NUM_GHOSTS; i++) {
-        ghosts[i].a.x = (8 + i) * TILE + HALF_TILE;
-        ghosts[i].a.y = 7 * TILE + HALF_TILE;
+        ghosts[i].a.x = ghostSpawnC[i] * TILE + HALF_TILE;
+        ghosts[i].a.y = ghostSpawnR[i] * TILE + HALF_TILE;
         ghosts[i].a.dx = (i == 1) ? 1 : -1;
         ghosts[i].a.dy = 0;
         ghosts[i].a.speed = GHOST_BASE_SPEED + (level * GHOST_SPEED_PER_LV);
@@ -81,10 +85,33 @@ void resetLevel(bool fullReset) {
 
     if (fullReset || dotsLeft == 0) {
         dotsLeft = 0;
+        int ghostSpawnCount = 0;
+        
+        // Default fallbacks in case map doesn't contain spawns
+        pacSpawnC = 9; pacSpawnR = 11;
+        ghostSpawnC[0] = 8; ghostSpawnC[1] = 9; ghostSpawnC[2] = 10;
+        ghostSpawnR[0] = 7; ghostSpawnR[1] = 7; ghostSpawnR[2] = 7;
+
         for (int r = 0; r < ROWS; r++) {
             for (int c = 0; c < COLS; c++) {
-                gameMap[r][c] = MAP_TEMPLATE[r][c];
-                if (gameMap[r][c] == CELL_DOT || gameMap[r][c] == CELL_POWER) dotsLeft++;
+                int mapIndex = (level - 1) % NUM_MAPS;
+                uint8_t cell = MAP_TEMPLATES[mapIndex][r][c];
+                
+                if (cell == CELL_PACMAN) {
+                    pacSpawnC = c;
+                    pacSpawnR = r;
+                    gameMap[r][c] = CELL_EMPTY;
+                } else if (cell == CELL_GHOST) {
+                    if (ghostSpawnCount < NUM_GHOSTS) {
+                        ghostSpawnC[ghostSpawnCount] = c;
+                        ghostSpawnR[ghostSpawnCount] = r;
+                        ghostSpawnCount++;
+                    }
+                    gameMap[r][c] = CELL_EMPTY;
+                } else {
+                    gameMap[r][c] = cell;
+                    if (cell == CELL_DOT || cell == CELL_POWER) dotsLeft++;
+                }
             }
         }
     }

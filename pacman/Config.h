@@ -29,6 +29,8 @@ constexpr uint8_t CELL_EMPTY = 0;
 constexpr uint8_t CELL_WALL  = 1;
 constexpr uint8_t CELL_DOT   = 2;
 constexpr uint8_t CELL_POWER = 3;
+constexpr uint8_t CELL_PACMAN= 4;
+constexpr uint8_t CELL_GHOST = 5;
 
 // ============================================================
 //  Renk paleti (RGB565)
@@ -105,21 +107,16 @@ enum GameState { TITLE, READY, PLAYING, DYING, GAMEOVER, WIN, PAUSE };
 // ============================================================
 //  Harita sablonu (salt okunur baslangic)
 // ============================================================
-const uint8_t MAP_TEMPLATE[ROWS][COLS] = {
-  {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-  {1,2,2,2,2,2,2,2,2,1,1,2,2,2,2,2,2,2,2,1},
-  {1,3,1,1,2,1,1,1,2,1,1,2,1,1,1,2,1,1,3,1},
-  {1,2,1,1,2,1,1,1,2,1,1,2,1,1,1,2,1,1,2,1},
-  {1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1},
-  {1,2,1,1,2,1,2,1,1,1,1,1,1,2,1,2,1,1,2,1},
-  {1,2,2,2,2,1,2,2,2,1,1,2,2,2,1,2,2,2,2,1},
-  {1,1,1,1,2,1,1,0,0,0,0,0,0,1,1,2,1,1,1,1},
-  {0,0,0,1,2,1,0,0,1,0,0,1,0,0,1,2,1,0,0,0},
-  {1,1,1,1,2,1,0,0,1,0,0,1,0,0,1,2,1,1,1,1},
-  {0,0,0,0,2,0,0,0,1,1,1,1,0,0,0,2,0,0,0,0},
-  {1,1,1,1,2,1,1,0,0,0,0,0,0,1,1,2,1,1,1,1},
-  {1,2,2,2,2,2,2,2,2,1,1,2,2,2,2,2,2,2,2,1},
-  {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
+#include "data/Level-1.h"
+#include "data/Level-2.h"
+#include "data/Level-3.h"
+
+constexpr int NUM_MAPS = 3;
+
+const uint8_t (* const MAP_TEMPLATES[NUM_MAPS])[COLS] = {
+    MAP_LEVEL_1,
+    MAP_LEVEL_2,
+    MAP_LEVEL_3
 };
 
 // ============================================================
@@ -141,6 +138,12 @@ extern uint32_t soundEndTime;
 extern uint32_t stateTimer;
 extern GameState state;
 extern uint8_t gameMap[ROWS][COLS];
+
+// Dynamic spawn coordinates
+extern int pacSpawnC;
+extern int pacSpawnR;
+extern int ghostSpawnC[NUM_GHOSTS];
+extern int ghostSpawnR[NUM_GHOSTS];
 
 // ============================================================
 //  isWall — Verilen kare duvar mi?

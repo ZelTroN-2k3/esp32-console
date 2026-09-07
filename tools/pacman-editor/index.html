@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pacman Level Editor</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <header class="header">
+            <div style="display: flex; align-items: baseline; gap: 1rem;">
+                <h1><span class="highlight">PACMAN</span> LEVEL EDITOR</h1>
+                <span id="current-filename" style="color: var(--text-muted); font-family: monospace; font-size: 0.9rem;">Level-X.h</span>
+            </div>
+            <div class="actions" style="display: flex; align-items: center; gap: 1rem;">
+                <button id="btn-new" class="btn btn-secondary">New</button>
+                <button id="btn-load" class="btn btn-secondary">Load</button>
+                <div style="width: 1px; height: 24px; background-color: var(--border-color); margin: 0 0.5rem;"></div>
+                <button id="btn-save" class="btn btn-primary" disabled>Save</button>
+                <button id="btn-save-as" class="btn btn-primary">Save As...</button>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <aside class="sidebar">
+                <div class="panel">
+                    <h2>Tools (Left Click)</h2>
+                    <div class="palette-grid" id="palette">
+                        <!-- Palette items injected by JS -->
+                    </div>
+                    
+                    <h2 style="margin-top: 1.5rem;">Information</h2>
+                    <div class="info-box">
+                        <p><strong>Dimensions:</strong> 20x14</p>
+                        <p><strong>Left Click:</strong> Draw</p>
+                        <p><strong>Right Click:</strong> Erase (Empty)</p>
+                        <p><strong>Drag:</strong> Continuous Draw</p>
+                    </div>
+                </div>
+
+            </aside>
+
+            <main class="editor-area">
+                <div class="canvas-wrapper">
+                    <div class="grid-container" id="grid">
+                        <!-- Grid injected by JS -->
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    
+    <!-- Modal for feedback (copied to clipboard etc) -->
+    <div id="toast" class="toast">Code copié !</div>
+
+    <script src="main.js"></script>
+</body>
+</html>
