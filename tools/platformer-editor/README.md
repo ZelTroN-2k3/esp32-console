@@ -1,30 +1,30 @@
 # 🚀 E-OS PLATFORMER Map Editor
 
-![Aperçu de l'éditeur Platformer](../images/E-OS%20PLATFORMER%20-%20MAP%20EDITOR.png)
+![Platformer Editor Preview](../images/E-OS%20PLATFORMER%20-%20MAP%20EDITOR.png)
 
-Bienvenue dans le dépôt du **PLATFORMER Map Editor** spécialement conçu pour le système **E-OS** (ESP32).
-Cet outil permet de créer des niveaux de jeu de plateforme 2D avec une gestion pixel-perfect des sauts et des collisions.
+Welcome to the **PLATFORMER Map Editor** repository specifically designed for the **E-OS** (ESP32) system.
+This tool allows you to create 2D platformer levels with pixel-perfect jump and collision management.
 
-## 🎯 Fonctionnalités Clés
+## 🎯 Key Features
 
-### 1. Éditeur Visuel et Aperçu Pixel-Perfect
-- **Grille de Création (40x16) :** Construisez votre niveau avec de gros blocs confortables à cliquer.
-- **Aperçu Réel (320x128px) :** Un mini-écran vous montre *exactement* le rendu final sur l'écran physique de l'ESP32, en temps réel.
-- **Indicateur de Saut (Jump Physics) :** L'aperçu affiche la trajectoire de saut maximale du personnage (3.5 tuiles de haut, 4.5 de long) pour vous aider à placer vos plateformes sans tester à l'aveugle.
+### 1. Visual Editor and Pixel-Perfect Preview
+- **Creation Grid (40x16):** Build your level with large, comfortable clickable blocks.
+- **Real Preview (320x128px):** A mini-screen shows you *exactly* the final rendering on the physical ESP32 screen, in real time.
+- **Jump Physics Indicator:** The preview displays the character's maximum jump trajectory (3.5 tiles high, 4.5 tiles long) to help you place your platforms without blindly guessing.
 
-### 2. Blocs et Objets Riches
-- **Construction :** Herbe (avec bordure détaillée), Briques, et Piques mortelles.
-- **Objets :** Pièces d'or (Coins), Drapeau de fin (Finish), et Ennemis.
-- Outils pour vider le niveau ou remplir instantanément le sol.
+### 2. Rich Blocks and Objects
+- **Construction:** Grass (with detailed borders), Bricks, and Deadly Spikes.
+- **Objects:** Gold Coins, Finish Flag, and Enemies.
+- Tools to clear the level or instantly fill the bottom row.
 
-### 3. Export / Import natif
-- Utilisation de la **File System Access API** pour ouvrir (Load) et écraser (Save) les fichiers `.h` du dossier `platformer/data/` en un seul clic, générant un code `PROGMEM` optimisé pour la mémoire Flash de l'ESP32.
+### 3. Native Export / Import
+- Utilizes the **File System Access API** to open (Load) and overwrite (Save) `.h` files from the `platformer/data/` folder in a single click, generating optimized `PROGMEM` code for the ESP32 Flash memory.
 
-## 🛠️ Stack Technique
-- **Interface Web Moderne :** HTML5/CSS3 Vanilla avec un design professionnel et de belles marges responsives.
-- **Moteur de Preview Canvas :** Un `<canvas>` HTML5 est dessiné en temps réel à chaque clic pour simuler le rendu C++ (`TFT_eSPI`) de l'ESP32.
-- **Génération C++ Avancée :** Analyse et écriture de la syntaxe d'array C++ à partir du Javascript Vanilla.
+## 🛠️ Technical Stack
+- **Modern Web Interface:** HTML5/CSS3 Vanilla with a professional design and nice responsive margins.
+- **Preview Canvas Engine:** An HTML5 `<canvas>` is drawn in real time on each click to simulate the C++ rendering (`TFT_eSPI`) of the ESP32.
+- **Advanced C++ Generation:** Parsing and writing C++ array syntax from Vanilla Javascript.
 
 ---
 
-*Développé pour la console E-OS ESP32. À vous de concevoir le prochain chef-d'œuvre de plateforme !*
+*Developed for the E-OS ESP32 console. It's your turn to design the next platforming masterpiece!*

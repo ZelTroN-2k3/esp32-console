@@ -1,30 +1,30 @@
 # 🚀 E-OS PACMAN Level Editor
 
-![Aperçu de l'éditeur Pacman](../images/PACMAN%20LEVEL%20EDITOR.png)
+![Pacman Editor Preview](../images/PACMAN%20LEVEL%20EDITOR.png)
 
-Bienvenue dans le dépôt du **PACMAN Level Editor** spécialement conçu pour le système **E-OS** (ESP32).
-Cet outil visuel moderne fonctionnant entièrement dans votre navigateur web vous permet de concevoir et d'exporter des niveaux compatibles avec le moteur Pacman intégré de E-OS.
+Welcome to the **PACMAN Level Editor** repository specifically designed for the **E-OS** (ESP32) system.
+This modern, web-based visual tool allows you to design and export levels compatible with the built-in Pacman engine of E-OS.
 
-## 🎯 Fonctionnalités Clés
+## 🎯 Key Features
 
-### 1. Éditeur Visuel Fluide
-- Grille de **20x14** reprenant les dimensions exactes de l'écran ESP32 (avec des tuiles de 16x16px).
-- **Palette Complète :** 
-  - Gomme, Mur (Wall), Pilule (Dot), et Super Pilule (Power Pellet).
-- Clic gauche pour dessiner, clic droit pour gommer rapidement !
+### 1. Smooth Visual Editor
+- **20x14 Grid** matching the exact dimensions of the ESP32 screen (with 16x16px tiles).
+- **Complete Palette:** 
+  - Eraser, Wall, Dot, and Power Pellet.
+- Left-click to draw, right-click for quick erase!
 
 ### 2. Export / Import (C++ Header)
-- **Intégration API de fichiers :** Le niveau s'exporte directement sous la forme d'un fichier `.h` (ex: `Level-1.h`) prêt à être compilé par le système E-OS.
-- **Lecture de code source :** L'outil est capable d'ouvrir vos fichiers `.h` existants, d'en extraire le tableau C++ (ex: `const uint8_t MAP_LEVEL_1[...] PROGMEM = { ... };`) et de l'afficher visuellement pour le modifier.
+- **File System API Integration:** The level can be exported directly as a `.h` file (e.g., `Level-1.h`) ready to be compiled by the E-OS system.
+- **Source Code Reading:** The tool can open your existing `.h` files, extract the C++ array (e.g., `const uint8_t MAP_LEVEL_1[...] PROGMEM = { ... };`), and display it visually for editing.
 
-### 3. Statistiques en Temps Réel
-- Un panneau de statistiques vous indique instantanément le nombre de pilules, de super pilules et de murs présents dans le niveau. Cela vous aide à équilibrer le gameplay.
+### 3. Real-Time Statistics
+- A statistics panel instantly shows you the number of dots, power pellets, and walls present in the level, helping you balance the gameplay.
 
-## 🛠️ Stack Technique
-- **HTML5 / CSS3 Vanilla :** Design moderne, interface fluide, boutons esthétiques.
-- **JavaScript Vanilla :** Manipulation efficace du DOM et parsing/génération de code C++ pour l'ESP32.
-- **File System Access API :** Utilisation avancée pour sauvegarder directement sur votre disque dur sans fenêtres de téléchargement intempestives.
+## 🛠️ Technical Stack
+- **HTML5 / CSS3 Vanilla:** Modern design, smooth interface, aesthetic buttons.
+- **Vanilla JavaScript:** Efficient DOM manipulation and C++ code parsing/generation for the ESP32.
+- **File System Access API:** Advanced usage to save directly to your hard drive without annoying download popups.
 
 ---
 
-*Développé pour la console E-OS ESP32. Créez les labyrinthes les plus intenses pour Pacman !*
+*Developed for the E-OS ESP32 console. Create the most intense mazes for Pacman!*

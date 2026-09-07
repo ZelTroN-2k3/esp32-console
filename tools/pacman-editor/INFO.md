@@ -1,23 +1,23 @@
-# ℹ️ E-OS PACMAN Level Editor - Informations Pratiques
+# ℹ️ E-OS PACMAN Level Editor - Practical Information
 
-Bienvenue dans le guide d'utilisation de l'éditeur de niveau PACMAN.
+Welcome to the PACMAN level editor user guide.
 
-## 🖱️ Navigation et Commandes
+## 🖱️ Navigation and Controls
 
-### Souris
-- **Clic Gauche (Maintenu)** : Peindre la tuile (mur, pilule) sélectionnée en continu.
-- **Clic Droit** : Raccourci pour utiliser la Gomme (Effacer une tuile), sans avoir besoin de la sélectionner dans la barre d'outils.
+### Mouse
+- **Left Click (Hold):** Continuously paint the selected tile (wall, dot, etc.).
+- **Right Click:** Quick shortcut to use the Eraser (delete a tile) without having to select it from the toolbar.
 
-### Raccourcis Clavier
-- **Touches `1`, `2`, `3`, `4`** : Basculer rapidement entre les différents blocs de construction :
-  - `1` : Gomme (Air)
-  - `2` : Mur (Wall)
-  - `3` : Pilule (Dot)
-  - `4` : Super Pilule (Power Pellet)
+### Keyboard Shortcuts
+- **Keys `1`, `2`, `3`, `4`:** Quickly switch between different building blocks:
+  - `1`: Eraser (Air)
+  - `2`: Wall
+  - `3`: Dot
+  - `4`: Power Pellet
 
-## 💾 Gestion des Fichiers
+## 💾 File Management
 
-- **New** : Réinitialise la carte avec un niveau totalement vide.
-- **Load** : Ouvre un fichier `.h` de niveau Pacman depuis votre ordinateur (ex: `pacman/data/Level-1.h`).
-- **Save** : Si vous avez chargé un niveau, ce bouton l'écrase directement avec vos nouvelles modifications (raccourci ultra-rapide).
-- **Save As...** : Exporte la grille actuelle dans un nouveau fichier `.h`. N'oubliez pas de l'ajouter dans `Config.h` de votre jeu C++ pour le rendre jouable !
+- **New:** Resets the map to a completely empty level.
+- **Load:** Opens a `.h` Pacman level file from your computer (e.g., `pacman/data/Level-1.h`).
+- **Save:** If you have loaded a level, this button directly overwrites it with your new modifications (ultra-fast shortcut).
+- **Save As...:** Exports the current grid to a new `.h` file. Don't forget to add it to `Config.h` in your C++ game to make it playable!
