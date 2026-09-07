@@ -395,6 +395,47 @@ inline void generateCAMap() {
 }
 
 // ------------------------------------------------------------
+//  CUSTOM MAP LOAD
+// ------------------------------------------------------------
+inline bool loadCustomMap(int floorNum) {
+    const uint8_t (*customTiles)[MAP_W] = getCustomTiles(floorNum);
+    if (customTiles == nullptr) return false;
+    
+    const uint8_t (*customEntities)[MAP_W] = getCustomEntities(floorNum);
+    if (customEntities == nullptr) return false;
+    
+    for (int y = 0; y < MAP_H; y++) {
+        for (int x = 0; x < MAP_W; x++) {
+            tiles[y][x] = customTiles[y][x];
+            fogMap[y][x] = FOG_DARK;
+        }
+    }
+    
+    startTileX = 1;
+    startTileY = 1;
+    mapHasLockedDoor = false;
+    
+    for (int y = 0; y < MAP_H; y++) {
+        for (int x = 0; x < MAP_W; x++) {
+            if (customEntities[y][x] == 99) {
+                startTileX = x;
+                startTileY = y;
+            }
+            if (tiles[y][x] == TILE_LOCKED) {
+                mapHasLockedDoor = true;
+            }
+        }
+    }
+    
+    roomCount = 1;
+    rooms[0] = {1, 1, MAP_W - 2, MAP_H - 2};
+    keyGuaranteePending = false;
+    updateFog(startTileX, startTileY);
+    
+    return true;
+}
+
+// ------------------------------------------------------------
 //  ANA ÜRETİM — her kat için çağrılır
 // ------------------------------------------------------------
 inline void generateMap(int floorNum) {

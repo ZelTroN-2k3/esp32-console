@@ -171,7 +171,37 @@ inline bool enemyBlocked(int x, int y) {
 }
 
 // ------------------------------------------------------------
-//  Tür istatistiklerini yükle
+//  CUSTOM MAP ENEMIES
+// ------------------------------------------------------------
+inline void loadCustomEnemies(int floorNum) {
+    const uint8_t (*customEntities)[MAP_W] = getCustomEntities(floorNum);
+    if (customEntities == nullptr) return;
+
+    for (int i = 0; i < MAX_ENEMIES; i++) enemies[i].alive = false;
+    boss.active = false;
+    
+    int placed = 0;
+    for (int y = 0; y < MAP_H; y++) {
+        for (int x = 0; x < MAP_W; x++) {
+            uint8_t ent = customEntities[y][x];
+            if (ent >= 1 && ent <= 3) {
+                if (placed < MAX_ENEMIES) {
+                    initEnemy(enemies[placed++], (EnemyType)ent, x, y);
+                }
+            } else if (ent >= 4 && ent <= 6) {
+                boss.active = true;
+                boss.type = (EnemyType)ent;
+                boss.hp = 100; // Will be scaled later if needed
+                boss.maxHp = 100;
+                bossStartX = x;
+                bossStartY = y;
+            }
+        }
+    }
+}
+
+// ------------------------------------------------------------
+//  Kat baslangc (normal dmanlar)
 // ------------------------------------------------------------
 inline void initEnemy(Enemy &e, EnemyType type, int x, int y) {
     e.alive = true;

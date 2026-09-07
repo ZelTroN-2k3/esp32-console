@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dungeon Maker</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header>
+    <div class="header-inner" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+        <div style="display: flex; align-items: baseline; gap: 1rem;">
+            <h1><span>E-OS</span> DUNGEON MAKER</h1>
+            <div style="display: flex; align-items: center; gap: 8px; background: rgba(0,0,0,0.5); padding: 4px 12px; border-radius: 4px; border: 1px solid var(--border);">
+                <span style="font-size: 0.8rem; color: var(--accent);">CODE NAME:</span>
+                <input type="text" id="levelCodeName" value="LEVEL_1" style="background: transparent; border: none; color: #fff; font-family: monospace; font-size: 1rem; width: 120px; outline: none; text-transform: uppercase;">
+            </div>
+            <span id="current-filename" style="color: var(--text); font-family: monospace; font-size: 0.9rem;">CustomDungeon-1.h</span>
+        </div>
+        <div class="actions" style="display: flex; align-items: center; gap: 1rem;">
+            <button id="btn-new" class="action-btn btn-secondary">New</button>
+            <button id="btn-load" class="action-btn btn-secondary">Load</button>
+            <div style="width: 1px; height: 24px; background-color: var(--border); margin: 0 0.5rem;"></div>
+            <button id="btn-save" class="action-btn btn-primary" disabled>Save</button>
+            <button id="btn-save-as" class="action-btn btn-primary">Save As...</button>
+        </div>
+    </div>
+</header>
+
+<div class="container">
+    <!-- TOOLBAR -->
+    <div class="panel toolbar">
+        
+        <button id="btn-generate" class="action-btn btn-magic">✨ Generate Random</button>
+        <button id="btn-campaign-mgr" class="action-btn btn-primary" style="background:#ff8c00;">📜 Campaign Manager</button>
+        <div style="height: 1px; background-color: var(--border); margin: 16px 0;"></div>
+
+        <div class="tool-group">
+            <button class="accordion active">🧱 Tiles</button>
+            <div class="accordion-content" style="display: flex;">
+                <button class="brush-btn active" data-type="tile" data-val="0"><div class="color-dot tile-0"></div> Wall</button>
+                <button class="brush-btn" data-type="tile" data-val="1"><div class="color-dot tile-1"></div> Floor</button>
+                <button class="brush-btn" data-type="tile" data-val="2"><div class="color-dot tile-2"></div> Door</button>
+                <button class="brush-btn" data-type="tile" data-val="3"><div class="color-dot tile-3"></div> Stairs</button>
+                <button class="brush-btn" data-type="tile" data-val="4"><div class="color-dot tile-4"></div> Chest</button>
+                <button class="brush-btn" data-type="tile" data-val="5"><div class="color-dot tile-5"></div> Locked Door</button>
+                <button class="brush-btn" data-type="tile" data-val="6"><div class="color-dot tile-6"></div> Swamp (Slow)</button>
+                <button class="brush-btn" data-type="tile" data-val="7"><div class="color-dot tile-7"></div> Flower (Poison)</button>
+                <button class="brush-btn" data-type="tile" data-val="8"><div class="color-dot tile-8"></div> Lava</button>
+                <button class="brush-btn" data-type="tile" data-val="9"><div class="color-dot tile-9"></div> Pillar</button>
+            </div>
+        </div>
+
+        <div class="tool-group">
+            <button class="accordion active">💀 Entities</button>
+            <div class="accordion-content" style="display: flex;">
+                <button class="brush-btn" data-type="player" data-val="99"><div class="color-dot" style="background-image: var(--spr-player); background-size: cover;"></div> Player Spawn</button>
+                <button class="brush-btn" data-type="enemy" data-val="1"><div class="color-dot" style="background-image: var(--spr-bat); background-size: cover;"></div> Bat</button>
+                <button class="brush-btn" data-type="enemy" data-val="2"><div class="color-dot" style="background-image: var(--spr-skeleton); background-size: cover;"></div> Skeleton</button>
+                <button class="brush-btn" data-type="enemy" data-val="3"><div class="color-dot" style="background-image: var(--spr-goblin); background-size: cover;"></div> Goblin</button>
+                
+                <h4 style="margin-top: 10px; font-size: 0.8rem; color: var(--accent);">BOSSES (2x2)</h4>
+                <button class="brush-btn" data-type="enemy" data-val="4"><div class="color-dot" style="background-image: var(--spr-dragon); background-size: cover;"></div> Dragon</button>
+                <button class="brush-btn" data-type="enemy" data-val="5"><div class="color-dot" style="background-image: var(--spr-lich); background-size: cover;"></div> Lich</button>
+                <button class="brush-btn" data-type="enemy" data-val="6"><div class="color-dot" style="background-image: var(--spr-golem); background-size: cover;"></div> Golem</button>
+            </div>
+        </div>
+
+        <button class="action-btn btn-danger" id="clearBtn">🗑️ Clear Map</button>
+        <button class="action-btn btn-secondary" id="fillFloorBtn">🌍 Fill Floor</button>
+    </div>
+
+    <!-- EDITOR GRID -->
+    <div class="panel grid-panel" style="flex: 1; display: flex; flex-direction: column; overflow: hidden; position: relative;">
+        <div class="editor-header">
+            <span>32x28 Tile Grid (8px per tile)</span>
+            <span class="coords" id="coordsDisplay">R:0 C:0</span>
+        </div>
+        
+        <div class="grid-scroll" style="overflow: auto; flex: 1; background: #000; border: 1px solid var(--border); border-radius: 4px; display: flex; justify-content: center; align-items: center; position: relative;">
+            <div id="grid-container" style="position: relative;">
+                <!-- JS WILL INJECT DIVS HERE -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="floatingTooltip" style="position:fixed; pointer-events:none; display:none; background:rgba(0,0,0,0.85); color:var(--accent); padding:4px 8px; border-radius:4px; font-size:12px; z-index:1000; border:1px solid var(--border); box-shadow:0 4px 6px rgba(0,0,0,0.5);"></div>
+
+<!-- CAMPAIGN MANAGER MODAL -->
+<div id="campaign-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:2000; justify-content:center; align-items:center;">
+    <div style="background:var(--panel-bg); padding:24px; border-radius:12px; border:2px solid var(--primary); width:400px; box-shadow:0 10px 40px rgba(0,0,0,0.8);">
+        <h2 style="margin-bottom: 16px; color:var(--primary); font-family:'Outfit', sans-serif;">📜 Campaign Manager</h2>
+        <p style="font-size:0.9rem; margin-bottom:16px;">Map your levels to floors. Save the exported <code>Campaign.h</code> in the <code>dungeon/data/</code> folder along with your level <code>.h</code> files.</p>
+        
+        <div id="campaign-list" style="max-height: 300px; overflow-y:auto; margin-bottom: 16px; display:flex; flex-direction:column; gap:8px;">
+            <!-- Rows injected by JS -->
+        </div>
+
+        <button id="btn-add-floor" class="action-btn btn-secondary" style="width:100%; margin-bottom:16px;">+ Add Floor</button>
+        
+        <div style="display:flex; justify-content:space-between; gap:16px;">
+            <button id="btn-close-campaign" class="action-btn btn-secondary" style="flex:1;">Cancel</button>
+            <button id="btn-export-campaign" class="action-btn btn-primary" style="flex:1;">Export Campaign.h</button>
+        </div>
+    </div>
+</div>
+
+<script src="main.js"></script>
+</body>
+</html>

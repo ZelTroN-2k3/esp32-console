@@ -18,6 +18,13 @@ constexpr int SCR_W  = 160;                              // Ekran genişliği (p
 constexpr int SCR_H  = 128;                              // Ekran yüksekliği (piksel)
 constexpr int HUD_H  = 10;                               // Üst HUD şeridi yüksekliği
 constexpr int TILE_PX = 8;                               // Bir hücrenin piksel boyutu
+
+// ============================================================
+// DUNGEON MAKER - CUSTOM MAP MODE
+// ============================================================
+// Set to true to load 'data/Campaign.h' instead of procedural generation
+constexpr bool USE_CUSTOM_MAP = true; 
+#include "data/Campaign.h"
 constexpr int VIEW_COLS = SCR_W / TILE_PX;               // Görünür sütun sayısı (20)
 constexpr int VIEW_ROWS = (SCR_H - HUD_H + TILE_PX - 1) / TILE_PX; // Görünür satır (15, son satır kırpılır)
 

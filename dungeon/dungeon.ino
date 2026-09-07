@@ -239,13 +239,25 @@ void showBiomeMessage() {
 }
 
 void startFloor() {
-    generateMap(floorNum);
+    bool isCustomFloor = false;
+    if (USE_CUSTOM_MAP) {
+        isCustomFloor = loadCustomMap(floorNum);
+    }
+    
+    if (!isCustomFloor) {
+        generateMap(floorNum);
+    }
+    
     player.setPosition(startTileX, startTileY);
     updateFog(player.tileX, player.tileY);
 
-    boss.active = false;
-    if (isBossFloor) initBoss(floorNum);
-    spawnEnemies(floorNum);
+    if (isCustomFloor) {
+        loadCustomEnemies(floorNum);
+    } else {
+        boss.active = false;
+        if (isBossFloor) initBoss(floorNum);
+        spawnEnemies(floorNum);
+    }
 
     merchant.active = false;
     merchant.talkedThisFloor = false;
