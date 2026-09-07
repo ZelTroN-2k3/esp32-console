@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-OS Tower Defense Maker</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+        <h1>E-OS <span>TOWER DEFENSE</span> MAKER</h1>
+        <div style="display: flex; gap: 10px; align-items: center;">
+            <label style="color: var(--text);">BIOME: 
+                <select id="biome-select" style="background: rgba(0,0,0,0.5); border: 1px solid var(--border); color: #fff; padding: 4px; border-radius: 4px; outline: none;">
+                    <option value="forest">🌲 FOREST</option>
+                    <option value="frozen">❄️ FROZEN</option>
+                    <option value="inferno">🔥 INFERNO</option>
+                </select>
+            </label>
+            <label style="color: var(--text); margin-left: 10px;">CODE NAME: <input type="text" id="level-name" value="LEVEL_1" style="background: rgba(0,0,0,0.5); border: 1px solid var(--border); color: #fff; padding: 4px 8px; border-radius: 4px;"></label>
+            <span id="current-filename" style="color: var(--text-dim); margin-right: 20px;">CustomMap.h</span>
+            <button id="btn-new" class="action-btn btn-secondary">NEW</button>
+            <button id="btn-load" class="action-btn btn-secondary">LOAD</button>
+            <button id="btn-save-as" class="action-btn btn-primary">SAVE As...</button>
+        </div>
+    </div>
+</header>
+
+<div class="container">
+    <!-- TOOLBAR -->
+    <div class="panel toolbar">
+        
+        <button id="btn-clear" class="action-btn btn-danger">🗑️ Clear Map</button>
+
+        <div style="margin-top: 8px;">
+            <label style="font-size: 0.8rem; color: var(--accent); text-transform: uppercase;">🔍 Zoom: <span id="zoom-val">x3</span></label>
+            <input type="range" id="zoom-slider" min="8" max="40" step="8" value="24" style="width: 100%; margin-top: 4px;">
+        </div>
+
+        <div style="height: 1px; background-color: var(--border); margin: 8px 0;"></div>
+
+        <div class="tool-group">
+            <button class="accordion active">🧱 Tiles</button>
+            <div class="accordion-content" style="display: flex;">
+                <button class="brush-btn active" data-type="tile" data-val="0"><div class="color-dot tile-0"></div> Grass</button>
+                <button class="brush-btn" data-type="tile" data-val="1"><div class="color-dot tile-1"></div> Path</button>
+                <button class="brush-btn" data-type="tile" data-val="3"><div class="color-dot tile-3"></div> Base (End)</button>
+                <button class="brush-btn" data-type="tile" data-val="4"><div class="color-dot tile-4"></div> Spawn (Start)</button>
+                <button class="brush-btn" data-type="tile" data-val="5"><div class="color-dot tile-5"></div> Rock</button>
+            </div>
+        </div>
+
+        <div class="info-box" style="margin-top:auto; font-size:0.8rem; color:var(--text-dim); padding:10px; background:rgba(0,0,0,0.3); border-radius:8px;">
+            <strong>Waypoints Info:</strong><br>
+            Draw a continuous Path from Spawn to Base. The editor will automatically calculate the Waypoints!
+        </div>
+    </div>
+
+    <!-- EDITOR GRID -->
+    <div class="panel grid-panel" style="flex: 1; display: flex; flex-direction: column; overflow: hidden; position: relative;">
+        <div class="editor-header">
+            <span>20x14 Tile Grid (8px per tile)</span>
+            <span class="coords" id="coordsDisplay">X:0 Y:0</span>
+        </div>
+        
+        <div class="grid-scroll" style="overflow: auto; flex: 1; background: #000; border: 1px solid var(--border); border-radius: 4px; display: flex; justify-content: center; align-items: center; position: relative;">
+            <div id="grid-container" style="position: relative;">
+                <!-- JS WILL INJECT DIVS HERE -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="main.js"></script>
+</body>
+</html>

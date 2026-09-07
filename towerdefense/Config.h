@@ -12,6 +12,11 @@
 #include <Arduino.h>
 #include <TFT_eSPI.h>
 
+#define USE_CUSTOM_MAP false
+#if USE_CUSTOM_MAP
+#include "data/CustomMap.h"
+#endif
+
 // ------------------------------------------------------------
 //  EKRAN VE GRID
 // ------------------------------------------------------------

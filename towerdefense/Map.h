@@ -56,10 +56,24 @@ inline void expandPath(int level) {
     int wpCount = PATH_WP_COUNTS[li];
 
     pathLen = 0;
-    pathTiles[pathLen++] = { PATH_WPS[li][0][0], PATH_WPS[li][0][1] };
+    int8_t wp0x = PATH_WPS[li][0][0], wp0y = PATH_WPS[li][0][1];
+#if USE_CUSTOM_MAP
+    if (level == 1) {
+        wpCount = CUSTOM_LEVEL_WP_COUNT;
+        wp0x = CUSTOM_LEVEL_WPS[0][0];
+        wp0y = CUSTOM_LEVEL_WPS[0][1];
+    }
+#endif
+    pathTiles[pathLen++] = { wp0x, wp0y };
     for (int w = 1; w < wpCount; w++) {
         int cx = PATH_WPS[li][w - 1][0], cy = PATH_WPS[li][w - 1][1];
         int tx = PATH_WPS[li][w][0],     ty = PATH_WPS[li][w][1];
+#if USE_CUSTOM_MAP
+        if (level == 1) {
+            cx = CUSTOM_LEVEL_WPS[w - 1][0]; cy = CUSTOM_LEVEL_WPS[w - 1][1];
+            tx = CUSTOM_LEVEL_WPS[w][0];     ty = CUSTOM_LEVEL_WPS[w][1];
+        }
+#endif
         int sx = (tx > cx) ? 1 : (tx < cx) ? -1 : 0;
         int sy = (ty > cy) ? 1 : (ty < cy) ? -1 : 0;
         while ((cx != tx || cy != ty) && pathLen < MAX_PATH) {
@@ -89,6 +103,10 @@ inline void initMap(int level) {
     if (level < 1) level = 1;
     if (level > LEVEL_COUNT) level = LEVEL_COUNT;
     const uint8_t (*src)[MAP_W] = LEVEL_MAPS[level - 1];
+
+#if USE_CUSTOM_MAP
+    if (level == 1) src = CUSTOM_LEVEL_MAP;
+#endif
 
     for (int y = 0; y < MAP_H; y++)
         for (int x = 0; x < MAP_W; x++)
