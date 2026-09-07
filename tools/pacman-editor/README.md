@@ -1,5 +1,7 @@
 # 🚀 E-OS PACMAN Level Editor
 
+![Aperçu de l'éditeur Pacman](../images/PACMAN%20LEVEL%20EDITOR.png)
+
 Bienvenue dans le dépôt du **PACMAN Level Editor** spécialement conçu pour le système **E-OS** (ESP32).
 Cet outil visuel moderne fonctionnant entièrement dans votre navigateur web vous permet de concevoir et d'exporter des niveaux compatibles avec le moteur Pacman intégré de E-OS.
 

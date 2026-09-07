@@ -1,5 +1,7 @@
 # 🚀 E-OS PLATFORMER Map Editor
 
+![Aperçu de l'éditeur Platformer](../images/E-OS%20PLATFORMER%20-%20MAP%20EDITOR.png)
+
 Bienvenue dans le dépôt du **PLATFORMER Map Editor** spécialement conçu pour le système **E-OS** (ESP32).
 Cet outil permet de créer des niveaux de jeu de plateforme 2D avec une gestion pixel-perfect des sauts et des collisions.
 
