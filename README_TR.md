@@ -127,6 +127,33 @@ Tüm oyunlar cihazın çözünürlüğüne ve donanım limitlerine göre optimiz
   </tr>
 </table>
 
+## Web Tabanlı Bölüm Editörleri
+
+Bu proje aynı zamanda HTML5/JS ile geliştirilmiş gelişmiş web tabanlı harita editörleri de içerir. Tamamen tarayıcıda çalışırlar ve ESP32 ile uyumlu C++ kodları üretirler.
+
+<table>
+  <tr>
+    <td width="200" align="center"><img src="tools/images/E-OS%20DUNGEON%20MAKER.png" width="180" style="border-radius: 6px;"></td>
+    <td valign="middle"><b>DUNGEON MAKER:</b> Dungeon oyunu için prosedürel olarak bölümler oluşturun, düzenleyin ve çok bölümlü hikayeler (campaign) tasarlayın.</td>
+  </tr>
+  <tr>
+    <td width="200" align="center"><img src="tools/images/E-OS%20TOWER%20DEFENSE%20MAKER.png" width="180" style="border-radius: 6px;"></td>
+    <td valign="middle"><b>TOWER DEFENSE MAKER:</b> Gerçek zamanlı biyom grafikleri ve otomatik waypoint yol bulma algoritması ile piksel mükemmelliğinde harita editörü.</td>
+  </tr>
+  <tr>
+    <td width="200" align="center"><img src="tools/images/E-OS%20PLATFORMER%20%E2%80%94%20MAP%20EDITOR.png" width="180" style="border-radius: 6px;"></td>
+    <td valign="middle"><b>PLATFORMER EDITOR:</b> Kendi 2D platform bölümlerinizi tasarlayın, düşmanları ve altınları yerleştirip C++ olarak dışa aktarın.</td>
+  </tr>
+  <tr>
+    <td width="200" align="center"><img src="tools/images/DOOM%20LEVEL%20EDITOR.png" width="180" style="border-radius: 6px;"></td>
+    <td valign="middle"><b>DOOM EDITOR:</b> Kendi raycasting haritalarınızı çizin, duvarları ve başlangıç noktalarını belirleyin.</td>
+  </tr>
+  <tr>
+    <td width="200" align="center"><img src="tools/images/PACMAN%20LEVEL%20EDITOR.png" width="180" style="border-radius: 6px;"></td>
+    <td valign="middle"><b>PACMAN EDITOR:</b> Klasik labirent düzenleri kurun ve hayalet yollarını tanımlayın.</td>
+  </tr>
+</table>
+
 ## İşletim Sistemi (E-OS Launcher)
 Tüm oyunlara ev sahipliği yapan akıcı, dönen (carousel) ana menü arayüzü olan **E-OS Launcher**, konsolun çekirdeğini oluşturur.
 

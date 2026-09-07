@@ -127,6 +127,33 @@ All games are heavily optimized for the device's resolution and hardware limits.
   </tr>
 </table>
 
+## Web-Based Level Editors
+
+This project also includes advanced web-based map editors built with HTML5/JS. They run entirely in the browser and output ESP32-compatible C++ code.
+
+<table>
+  <tr>
+    <td width="200" align="center"><img src="tools/images/E-OS%20DUNGEON%20MAKER.png" width="180" style="border-radius: 6px;"></td>
+    <td valign="middle"><b>DUNGEON MAKER:</b> Procedurally generate, edit, and orchestrate multi-level campaigns for the Dungeon game.</td>
+  </tr>
+  <tr>
+    <td width="200" align="center"><img src="tools/images/E-OS%20TOWER%20DEFENSE%20MAKER.png" width="180" style="border-radius: 6px;"></td>
+    <td valign="middle"><b>TOWER DEFENSE MAKER:</b> Pixel-perfect map editor with real-time biome rendering and automated waypoint pathfinding.</td>
+  </tr>
+  <tr>
+    <td width="200" align="center"><img src="tools/images/E-OS%20PLATFORMER%20%E2%80%94%20MAP%20EDITOR.png" width="180" style="border-radius: 6px;"></td>
+    <td valign="middle"><b>PLATFORMER EDITOR:</b> Create custom 2D platformer levels, place enemies, coins, and export to C++.</td>
+  </tr>
+  <tr>
+    <td width="200" align="center"><img src="tools/images/DOOM%20LEVEL%20EDITOR.png" width="180" style="border-radius: 6px;"></td>
+    <td valign="middle"><b>DOOM EDITOR:</b> Design your own raycasting maps, place walls, sprites, and spawn points.</td>
+  </tr>
+  <tr>
+    <td width="200" align="center"><img src="tools/images/PACMAN%20LEVEL%20EDITOR.png" width="180" style="border-radius: 6px;"></td>
+    <td valign="middle"><b>PACMAN EDITOR:</b> Build classic maze layouts and define ghost paths.</td>
+  </tr>
+</table>
+
 ## Operating System (E-OS Launcher)
 The **E-OS Launcher** acts as the main OS, providing a fluid, rotating (carousel) main menu interface hosting all games.
 
